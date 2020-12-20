@@ -1,0 +1,231 @@
+random_string.random_name: Refreshing state... [id=b3ke]
+openstack_compute_keypair_v2.keypair: Refreshing state... [id=b3ke]
+openstack_compute_secgroup_v2.sec_ingr: Refreshing state... [id=6d26afdf-1d0d-4ffd-9717-12608688a64a]
+openstack_compute_instance_v2.balancer: Refreshing state... [id=cfe664c7-19d1-4f75-bf8b-dda1e106909d]
+openstack_compute_instance_v2.web[0]: Refreshing state... [id=163cacd5-8457-4e58-a3eb-284a50e8b88d]
+openstack_compute_instance_v2.web[1]: Refreshing state... [id=d51af900-a4ce-4cc6-9de4-d2c78bd3ad05]
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  - destroy
+
+Terraform will perform the following actions:
+
+  # openstack_compute_instance_v2.balancer will be destroyed
+  - resource "openstack_compute_instance_v2" "balancer" {
+      - access_ip_v4        = "100.64.6.7" -> null
+      - access_ip_v6        = "[2001:690:2139:87:f816:3eff:fed7:ddd4]" -> null
+      - all_metadata        = {} -> null
+      - all_tags            = [] -> null
+      - availability_zone   = "zone1" -> null
+      - flavor_id           = "0" -> null
+      - flavor_name         = "t1.nano" -> null
+      - force_delete        = false -> null
+      - id                  = "cfe664c7-19d1-4f75-bf8b-dda1e106909d" -> null
+      - image_id            = "0c43fa1b-c74e-49d4-9a6f-eecd49cad46a" -> null
+      - image_name          = "Ubuntu-Bionic-Latest" -> null
+      - key_pair            = "b3ke" -> null
+      - name                = "balancer" -> null
+      - power_state         = "active" -> null
+      - region              = "RegionA" -> null
+      - security_groups     = [
+          - "default",
+          - "sec_ingr",
+        ] -> null
+      - stop_before_destroy = false -> null
+      - tags                = [] -> null
+
+      - network {
+          - access_network = false -> null
+          - fixed_ip_v4    = "100.64.6.7" -> null
+          - fixed_ip_v6    = "[2001:690:2139:87:f816:3eff:fed7:ddd4]" -> null
+          - mac            = "fa:16:3e:d7:dd:d4" -> null
+          - name           = "n-AGISIT7-AGISIT-Teams-2" -> null
+          - uuid           = "3039b85f-b1c0-4a05-afad-df6435bc2d9b" -> null
+        }
+    }
+
+  # openstack_compute_instance_v2.web[0] will be destroyed
+  - resource "openstack_compute_instance_v2" "web" {
+      - access_ip_v4        = "100.64.6.6" -> null
+      - access_ip_v6        = "[2001:690:2139:87:f816:3eff:fe4d:73b2]" -> null
+      - all_metadata        = {} -> null
+      - all_tags            = [] -> null
+      - availability_zone   = "zone1" -> null
+      - flavor_id           = "0" -> null
+      - flavor_name         = "t1.nano" -> null
+      - force_delete        = false -> null
+      - id                  = "163cacd5-8457-4e58-a3eb-284a50e8b88d" -> null
+      - image_id            = "0c43fa1b-c74e-49d4-9a6f-eecd49cad46a" -> null
+      - image_name          = "Ubuntu-Bionic-Latest" -> null
+      - key_pair            = "b3ke" -> null
+      - name                = "web1" -> null
+      - power_state         = "active" -> null
+      - region              = "RegionA" -> null
+      - security_groups     = [
+          - "default",
+          - "sec_ingr",
+        ] -> null
+      - stop_before_destroy = false -> null
+      - tags                = [] -> null
+
+      - network {
+          - access_network = false -> null
+          - fixed_ip_v4    = "100.64.6.6" -> null
+          - fixed_ip_v6    = "[2001:690:2139:87:f816:3eff:fe4d:73b2]" -> null
+          - mac            = "fa:16:3e:4d:73:b2" -> null
+          - name           = "n-AGISIT7-AGISIT-Teams-2" -> null
+          - uuid           = "3039b85f-b1c0-4a05-afad-df6435bc2d9b" -> null
+        }
+    }
+
+  # openstack_compute_instance_v2.web[1] will be destroyed
+  - resource "openstack_compute_instance_v2" "web" {
+      - access_ip_v4        = "100.64.6.12" -> null
+      - access_ip_v6        = "[2001:690:2139:87:f816:3eff:fed5:c89d]" -> null
+      - all_metadata        = {} -> null
+      - all_tags            = [] -> null
+      - availability_zone   = "zone1" -> null
+      - flavor_id           = "0" -> null
+      - flavor_name         = "t1.nano" -> null
+      - force_delete        = false -> null
+      - id                  = "d51af900-a4ce-4cc6-9de4-d2c78bd3ad05" -> null
+      - image_id            = "0c43fa1b-c74e-49d4-9a6f-eecd49cad46a" -> null
+      - image_name          = "Ubuntu-Bionic-Latest" -> null
+      - key_pair            = "b3ke" -> null
+      - name                = "web2" -> null
+      - power_state         = "active" -> null
+      - region              = "RegionA" -> null
+      - security_groups     = [
+          - "default",
+          - "sec_ingr",
+        ] -> null
+      - stop_before_destroy = false -> null
+      - tags                = [] -> null
+
+      - network {
+          - access_network = false -> null
+          - fixed_ip_v4    = "100.64.6.12" -> null
+          - fixed_ip_v6    = "[2001:690:2139:87:f816:3eff:fed5:c89d]" -> null
+          - mac            = "fa:16:3e:d5:c8:9d" -> null
+          - name           = "n-AGISIT7-AGISIT-Teams-2" -> null
+          - uuid           = "3039b85f-b1c0-4a05-afad-df6435bc2d9b" -> null
+        }
+    }
+
+  # openstack_compute_keypair_v2.keypair will be destroyed
+  - resource "openstack_compute_keypair_v2" "keypair" {
+      - fingerprint = "2e:06:1e:e5:8a:53:af:66:f4:9a:7e:6e:b2:18:fe:d5" -> null
+      - id          = "b3ke" -> null
+      - name        = "b3ke" -> null
+      - public_key  = <<~EOT
+            ssh-rsa ...
+        EOT -> null
+      - region      = "RegionA" -> null
+    }
+
+  # openstack_compute_secgroup_v2.sec_ingr will be destroyed
+  - resource "openstack_compute_secgroup_v2" "sec_ingr" {
+      - description = "a security group" -> null
+      - id          = "6d26afdf-1d0d-4ffd-9717-12608688a64a" -> null
+      - name        = "sec_ingr" -> null
+      - region      = "RegionA" -> null
+
+      - rule {
+          - cidr        = "0.0.0.0/0" -> null
+          - from_port   = 443 -> null
+          - id          = "af593ed2-5491-4d75-b823-41bcd6a71a7e" -> null
+          - ip_protocol = "tcp" -> null
+          - self        = false -> null
+          - to_port     = 443 -> null
+        }
+      - rule {
+          - cidr        = "0.0.0.0/0" -> null
+          - from_port   = 80 -> null
+          - id          = "3e7b85e5-2fa0-471a-97fc-9b92e5fa1517" -> null
+          - ip_protocol = "tcp" -> null
+          - self        = false -> null
+          - to_port     = 80 -> null
+        }
+    }
+
+  # random_string.random_name will be destroyed
+  - resource "random_string" "random_name" {
+      - id          = "b3ke" -> null
+      - length      = 4 -> null
+      - lower       = true -> null
+      - min_lower   = 0 -> null
+      - min_numeric = 0 -> null
+      - min_special = 0 -> null
+      - min_upper   = 0 -> null
+      - number      = true -> null
+      - result      = "b3ke" -> null
+      - special     = false -> null
+      - upper       = false -> null
+    }
+
+Plan: 0 to add, 0 to change, 6 to destroy.
+
+Changes to Outputs:
+  - balancer_IP        = "100.64.6.7" -> null
+  - keypair            = "b3ke" -> null
+  - private_key        = <<~EOT
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        ...
+        -----END OPENSSH PRIVATE KEY-----
+    EOT -> null
+  - public_key         = <<~EOT
+        ssh-rsa ...
+    EOT -> null
+  - sec_rules          = [
+      - {
+          - cidr          = "0.0.0.0/0"
+          - from_group_id = ""
+          - from_port     = 443
+          - id            = "af593ed2-5491-4d75-b823-41bcd6a71a7e"
+          - ip_protocol   = "tcp"
+          - self          = false
+          - to_port       = 443
+        },
+      - {
+          - cidr          = "0.0.0.0/0"
+          - from_group_id = ""
+          - from_port     = 80
+          - id            = "3e7b85e5-2fa0-471a-97fc-9b92e5fa1517"
+          - ip_protocol   = "tcp"
+          - self          = false
+          - to_port       = 80
+        },
+    ] -> null
+  - terraform-provider = "Connected with VM Cloud at var.auth_url" -> null
+  - web_IPs            = [
+      - "web1 = 100.64.6.6",
+      - "web2 = 100.64.6.12",
+    ] -> null
+
+Do you really want to destroy all resources?
+  Terraform will destroy all your managed infrastructure, as shown above.
+  There is no undo. Only 'yes' will be accepted to confirm.
+
+  Enter a value: yes
+
+openstack_compute_instance_v2.web[1]: Destroying... [id=d51af900-a4ce-4cc6-9de4-d2c78bd3ad05]
+openstack_compute_instance_v2.web[0]: Destroying... [id=163cacd5-8457-4e58-a3eb-284a50e8b88d]
+openstack_compute_instance_v2.balancer: Destroying... [id=cfe664c7-19d1-4f75-bf8b-dda1e106909d]
+openstack_compute_instance_v2.web[1]: Still destroying... [id=d51af900-a4ce-4cc6-9de4-d2c78bd3ad05, 10s elapsed]
+openstack_compute_instance_v2.web[0]: Still destroying... [id=163cacd5-8457-4e58-a3eb-284a50e8b88d, 10s elapsed]
+openstack_compute_instance_v2.balancer: Still destroying... [id=cfe664c7-19d1-4f75-bf8b-dda1e106909d, 10s elapsed]
+openstack_compute_instance_v2.web[1]: Still destroying... [id=d51af900-a4ce-4cc6-9de4-d2c78bd3ad05, 20s elapsed]
+openstack_compute_instance_v2.web[0]: Still destroying... [id=163cacd5-8457-4e58-a3eb-284a50e8b88d, 20s elapsed]
+openstack_compute_instance_v2.balancer: Still destroying... [id=cfe664c7-19d1-4f75-bf8b-dda1e106909d, 20s elapsed]
+openstack_compute_instance_v2.web[1]: Destruction complete after 22s
+openstack_compute_instance_v2.web[0]: Destruction complete after 22s
+openstack_compute_instance_v2.balancer: Destruction complete after 22s
+openstack_compute_secgroup_v2.sec_ingr: Destroying... [id=6d26afdf-1d0d-4ffd-9717-12608688a64a]
+openstack_compute_keypair_v2.keypair: Destroying... [id=b3ke]
+openstack_compute_keypair_v2.keypair: Destruction complete after 0s
+random_string.random_name: Destroying... [id=b3ke]
+random_string.random_name: Destruction complete after 0s
+openstack_compute_secgroup_v2.sec_ingr: Destruction complete after 2s
+
+Destroy complete! Resources: 6 destroyed.

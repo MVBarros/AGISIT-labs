@@ -1,0 +1,23 @@
+vagrant@mgmt:~/examples$ ansible-playbook ssh-addkey.yml 
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [install ssh key] **********************************************************************************************************************************************************************
+ok: [web4]
+ok: [web3]
+ok: [web1]
+ok: [web2]
+ok: [web5]
+ok: [web6]
+ok: [balancer]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+

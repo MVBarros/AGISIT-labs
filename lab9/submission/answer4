@@ -1,0 +1,11 @@
+google_compute_firewall.frontend_rules: Refreshing state... [id=projects/agisit-2021-website-87691/global/firewalls/frontend]
+google_compute_instance.balancer: Refreshing state... [id=projects/agisit-2021-website-87691/zones/europe-west3-c/instances/balancer]
+google_compute_instance.web[0]: Refreshing state... [id=projects/agisit-2021-website-87691/zones/europe-west3-c/instances/web1]
+
+Outputs:
+
+balancer = 34.89.253.150
+balancer_ssh = https://www.googleapis.com/compute/v1/projects/agisit-2021-website-87691/zones/europe-west3-c/instances/balancer
+web_IPs = [
+  "web1 = 34.89.237.127",
+]

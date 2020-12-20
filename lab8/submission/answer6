@@ -1,0 +1,86 @@
+
+PLAY [targets] ******************************************************************************
+
+TASK [Remove require tty - alt] *************************************************************
+ok: [balancer]
+ok: [web2]
+ok: [web1]
+
+TASK [Validate the sudoers file before saving  not to require password] *********************
+ok: [web1]
+ok: [balancer]
+ok: [web2]
+
+TASK [install ssh key] **********************************************************************
+ok: [balancer]
+ok: [web2]
+ok: [web1]
+
+PLAY [web] **********************************************************************************
+
+TASK [Gathering Facts] **********************************************************************
+ok: [web2]
+ok: [web1]
+
+TASK [Add NGINX Repository] *****************************************************************
+ok: [web2]
+ok: [web1]
+
+TASK [install nginx] ************************************************************************
+ok: [web2]
+ok: [web1]
+
+TASK [debug] ********************************************************************************
+ok: [web1] => {
+    "conf_nginx": {
+        "cache_update_time": 1605878871, 
+        "cache_updated": false, 
+        "changed": false, 
+        "failed": false
+    }
+}
+ok: [web2] => {
+    "conf_nginx": {
+        "cache_update_time": 1605878870, 
+        "cache_updated": false, 
+        "changed": false, 
+        "failed": false
+    }
+}
+
+TASK [deploy website content] ***************************************************************
+changed: [web2]
+changed: [web1]
+
+PLAY [loadbal] ******************************************************************************
+
+TASK [Gathering Facts] **********************************************************************
+ok: [balancer]
+
+TASK [update /etc/hosts file for name resolution of self] ***********************************
+changed: [balancer] => (item=balancer)
+
+TASK [update /etc/hosts file for name resolution] *******************************************
+changed: [balancer] => (item=web1)
+changed: [balancer] => (item=web2)
+
+TASK [install haproxy and socat] ************************************************************
+changed: [balancer]
+
+TASK [enable haproxy] ***********************************************************************
+changed: [balancer]
+
+TASK [deploy haproxy config] ****************************************************************
+changed: [balancer]
+
+TASK [Ensure HAProxy is started and enabled on boot.] ***************************************
+ok: [balancer]
+
+RUNNING HANDLER [restart haproxy] ***********************************************************
+changed: [balancer]
+
+PLAY RECAP **********************************************************************************
+balancer                   : ok=11   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=8    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

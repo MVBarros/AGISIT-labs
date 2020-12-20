@@ -1,0 +1,52 @@
+vagrant@mgmt:~/examples$ ansible all -m shell -a "ntpq -p"
+web5 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp.rnl.tecnico 193.147.107.33   2 u   32   64    1    1.784  1894.27   0.000
+ ntp21.kashra-se 192.168.100.15   2 u   31   64    1   43.301  1890.06   0.000
+ pugot.canonical 17.253.108.125   2 u   30   64    1   61.821  1896.07   0.000
+web1 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp22.kashra-se 192.168.100.15   2 u   31   64    1   42.245  2128.45   0.000
+ smtp-in1.aqea.n 194.117.47.44    3 u   30   64    1    3.058  2132.99   0.000
+ ntp04.oal.ul.pt 193.190.230.65   2 u   29   64    1    2.953  2133.37   0.000
+ pugot.canonical 17.253.108.125   2 u   28   64    1   60.021  2133.68   0.000
+web3 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp.rnl.tecnico 193.147.107.33   2 u   31   64    1    1.765  1994.37   0.000
+ smtp-in1.aqea.n 194.117.47.44    3 u   31   64    1    2.976  1994.50   0.000
+ ntp1.tecnico.ul 150.214.94.5     2 u   30   64    1    1.657  1995.80   0.000
+ pugot.canonical 17.253.108.125   2 u   29   64    1   65.471  1994.95   0.000
+web4 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp1.unixcraft. 162.23.41.10     2 u   32   64    1   38.258  1930.36   0.000
+ ntp22.kashra-se 192.168.100.15   2 u   31   64    1   39.954  1927.81   0.000
+ ntp21.kashra-se 192.168.100.15   2 u   30   64    1   42.542  1928.95   0.000
+ ntp1.tecnico.ul 150.214.94.5     2 u   29   64    1    1.661  1935.30   0.000
+ pugot.canonical 17.253.108.125   2 u   28   64    1   76.697  1928.22   0.000
+web2 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp22.kashra-se 192.168.100.15   2 u   31   64    1   42.112  2066.09   0.000
+ ntp21.kashra-se .INIT.          16 u    -   64    0    0.000    0.000   0.000
+ smtp-in1.aqea.n 194.117.47.44    3 u   29   64    1  111.512  2125.46   0.000
+ ntp.rnl.tecnico 193.147.107.33   2 u   29   64    1    2.122  2071.82   0.000
+ chilipepper.can 134.71.66.21     2 u   28   64    1   29.737  2073.12   0.000
+balancer | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp.rnl.tecnico 193.147.107.33   2 u   31   64    1    1.858  2193.83   0.000
+ smtp-in1.aqea.n 194.117.47.44    3 u   30   64    1  112.911  2249.43   0.000
+ ftp.claranet.pt 194.8.30.16      3 u   29   64    1    3.155  2195.56   0.000
+ pugot.canonical 17.253.108.125   2 u   28   64    1   65.555  2195.43   0.000
+web6 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp1.unixcraft. 162.23.41.10     2 u   31   64    1   41.578  1835.25   0.000
+ smtp-in1.aqea.n 194.117.47.44    3 u   30   64    1  152.632  1911.08   0.000
+ ntp04.oal.ul.pt 193.190.230.65   2 u   30   64    1    3.129  1836.66   0.000
+ ntp.rnl.tecnico 193.147.107.33   2 u   29   64    1   17.310  1831.14   0.000
+ alphyn.canonica 142.3.100.2      2 u   27   64    1   97.133  1839.27   0.000

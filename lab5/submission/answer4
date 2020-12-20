@@ -1,0 +1,12 @@
+Security Groups
+
+default
+
+        ALLOW IPv6 to ::/0
+        ALLOW IPv6 from default
+        ALLOW IPv4 icmp from 0.0.0.0/0
+        ALLOW IPv4 to 0.0.0.0/0
+        ALLOW IPv4 22/tcp from 0.0.0.0/0
+        ALLOW IPv4 from default
+
+

@@ -1,0 +1,15 @@
+vagrant@mgmt:~/examples$ ansible all -m shell -a " uname -a "
+web4 | CHANGED | rc=0 >>
+Linux web4 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+web5 | CHANGED | rc=0 >>
+Linux web5 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+web3 | CHANGED | rc=0 >>
+Linux web3 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+web1 | CHANGED | rc=0 >>
+Linux web1 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+web2 | CHANGED | rc=0 >>
+Linux web2 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+web6 | CHANGED | rc=0 >>
+Linux web6 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux
+balancer | CHANGED | rc=0 >>
+Linux balancer 3.13.0-170-generic #220-Ubuntu SMP Thu May 9 12:40:49 UTC 2019 x86_64 x86_64 x86_64 GNU/Linux

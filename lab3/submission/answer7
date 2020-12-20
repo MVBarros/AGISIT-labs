@@ -1,0 +1,21 @@
+The playbook is composed by 3 tasks:
+
+install ntp: Uses the ansible.builtin.apt module to manage apt tasks (this module is included in all ansible installations). It uses the following parameters:
+    name: list of package names to be used by the task
+    state: desired package state. In this case present meaning the task is to install the packages in the name parameter list
+    update_cache: Indicates if the hosts should run the equivalent of apt-get update before the operation. In this case it is true.
+This task will thus run apt-get update to update the package cache and then apt-get install ntp to install the ntp software package
+
+write our ntp.conf: Uses the ansible.builtin.copy module to copy files from the local or remote machine to a location in the remote machine. It uses the following parameters:
+    src: Local path to a file/directory to copy to the remote server.
+    dest Remote absolute path where the file/directory (indicated by src) should be copied to
+    mode: The permissions of the destination file or directory in the remote machine (an octal number).
+    owner: Name of the user that should own the file/directory in the remote machine.
+    group: Name of the group that should own the file/directory in the remote machine.
+This task will thus copy the file /home/vagrant/examples/files/ntp.conf in the mgmt machine to the hosts machines, set it's owner and group to root and set the permissions to be identified by the octal number 0644.
+This task also notifies the restart ntp handler that uses the ansible.builtin.service module to restart the ntp service.
+
+start ntp: Uses the ansible.builtin.service module to control services on remote hosts. It uses the following parameters:
+    name: Name of the service.
+    state: Desired state of the service
+This task will thus start the ntp service (since the machines are running ubuntu it will do so using the systemd init system)

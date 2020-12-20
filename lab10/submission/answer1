@@ -1,0 +1,53 @@
+Inside the "gcpkube-tenant" directory there are the following configuration files:
+
+"gcp-gke-variables.tf": declares variables used by other configuration files, namely "project" (the google cloud project id) and "region" (regions were the project resources will be deployed)
+
+"gcp-gke-provider.tf": configures the "google" provider, used to configure the Google Cloud Platform infrastructure. 
+Specifically it configures the project, zone attributes with the variables defined in the "gcp-gke-variables.tf" file and the credentials with contents of a service account key file in JSON format, obtained from the Google Cloud console earlier in the assignment.
+
+"main.tf: declares two modules "gcp_gke" and "gcp_k8s" (found in folders with the same name as the modules). 
+Aditionally, declares two variables ("username" and "password") used as parameters in the "gcp_k8s" module (the other parameters used by this module are outputed by the "gcp_gke" module)
+
+The module "gcp_gke" consists of a single file, "gcp-gke-cluster.tf", that declares the variables "username", "password", "region" and "project". This have the same meaning and value as the variables defined in the previous configuration files, but are not passed as input variables by the root module ("as we can see when analysing the "gcp_gke" module block in the "main.tf" file).
+Aditionally, the module declares a resource, with name "guestbook", of type "google_container_cluster". This type declares a Google Kubernetes Engine (GKE) cluster. 
+From the GKE documentation (https://cloud.google.com/kubernetes-engine/docs/concepts/cluster-architecture):
+"A cluster is the foundation of Google Kubernetes Engine (GKE): the Kubernetes objects that represent your containerized applications all run on top of a cluster.
+In GKE, a cluster consists of at least one control plane and multiple worker machines called nodes. 
+These control plane and node machines run the Kubernetes cluster orchestration system.
+The control plane runs the control plane processes, including the Kubernetes API server, scheduler, and core resource controllers.
+A cluster typically has one or more nodes, which are the worker machines that run your containerized applications and other workloads. The individual machines are Compute Engine VM instances that GKE creates on your behalf when you create a cluster.
+Each node is managed from the control plane, which receives updates on each node's self-reported status. 
+You can exercise some manual control over node lifecycle, or you can have GKE perform automatic repairs and automatic upgrades on your cluster's nodes."
+The following parameters are defined for this resource:
+    name: The name of the cluster, unique within the project and location.
+    location: The location (region or zone) in which the cluster master will be created, as well as the default node location. Since we specified a region instead of a zone,  the cluster will be a regional cluster with multiple masters spread across zones in the region, and with default node locations in those zones as well.
+    initial_node_count: The number of nodes to create in this cluster's default node pool. In our case, this is the number of nodes per zone of our region.
+    master_auth: The authentication information for accessing the Kubernetes master.
+    node_config: Parameters used in creating the default node pool.
+(A node pool is a group of nodes within a cluster that all have the same configuration).
+Finally, the file declares the following outputs (that will be used by the gcp_k8s module):
+    "client_certificate": Base64 encoded public certificate used by clients to authenticate to the cluster endpoint.
+    "client_key: Base64 encoded private key used by clients to authenticate to the cluster endpoint.
+    "cluster_ca_certificate": Base64 encoded public certificate that is the root of trust for the cluster.
+    "host": The IP address of the cluster's Kubernetes master.
+
+The module "gcp_k8s" consists of 4 files:
+- "k8s-variables.tf": defines variables used by the rest of the module files, namely "username" and "password" (these have a default value that is overwritten by the root module), and "host", "client_certificate", "client_key" and "cluster_ca_certificate" (the root module sets this to the corresponding output variables of the "gcp_gke" module).
+- "k8s-provider.tf": defines the kubernetes provider, used to interact with the resources supported by Kubernetes, configured with the credentials defined in the "k8s-variables.tf" file.
+- "k8s-pods.tf": Defines the pods of the kubernetes application. From the kubernetes documentation: "A Pod (as in a pod of whales or pea pod) is a group of one or more containers, with shared storage/network resources, and a specification for how to run the containers"
+It does this by definning 3 resources of type "kubernetes_replication_controller". From the terraform documentation:
+"A Replication Controller ensures that a specified number of pod “replicas” are running at any one time. 
+In other words, a Replication Controller makes sure that a pod or homogeneous set of pods are always up and available. 
+If there are too many pods, it will kill some. If there are too few, the Replication Controller will start more."
+The "redis-master" resource declares one replica pod running redis in the master role. (meaning clients write to this replica, that then synchronises the writes to the slaves).
+The "redis-slave" resource declares two replica pods running redis in the slave role. (meaning clients can only read, not write to this replica, unless the master fails and the slave replaces it as the new master).
+The "frontend" resource declares three replica pods running the guestbook application (https://kubernetes.io/docs/tutorials/stateless-application/guestbook/).
+- "k8s-services.tf": Defines 3 kubernetes services. From the documentation: "A Service is an abstraction which defines a logical set of pods and a policy by which to access them - sometimes called a micro-service."
+The "redis-master" resource defines a service running redis in the master role, accesible by port 6379.
+The "redis-slave" resource defines a service running redis in the slave role, accesible by port 6379.
+The "frontend" resource defines a service running  the guestbook application, exposed through the cloud provider's load balancer.
+A Service enables network access to a set of Pods in Kubernetes.
+Services select Pods based on their labels. 
+When a network request is made to the service, it selects all Pods in the cluster matching the service's selector, chooses one of them, and forwards the network request to it.
+Analysing the pods and services, we can see that the metadata blocks of the pods match the selectors of the corresponding services.
+All of the pods, services, nodes and replicas defines in the module will be deployed in the cluster declared in the gcp_gke module.

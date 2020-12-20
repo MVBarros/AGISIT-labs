@@ -1,0 +1,28 @@
+The "terraform-gcp-variables.tf" file defines default values for input variables.
+
+Quoting the terraform documentation:
+
+"Input variables serve as parameters for a Terraform module, allowing aspects of the module to be customized without altering the module's own source code, and allowing modules to be shared between different configurations."
+
+For our puposes, input variables allows us to programmaticaly define:
+- the google cloud platform project name (variable GCP_PROJECT_NAME)
+- the machine type for the machines we wish to declare (variable GCP_MACHINE_TYPE).
+- the region we wish to create the machines in (variable GCP_REGION)
+(The variable DISK_SIZE is as of now unused in any of the configuration files).
+
+These input variables can then used in the configuration files. 
+
+The "terraform-gcp-provider" configuration file defines a provider. Quoting the terraform documentation:
+
+"A provider is responsible for understanding API interactions and exposing resources. Most providers configure a specific infrastructure platform (either cloud or self-hosted). Providers can also offer local utilities for tasks like generating random numbers for unique resource names"
+
+We can see the variable GCP_PROJECT_NAME being used in line 10 ("var.GCP_PROJECT_NAME") and the variable GCP_REGION used in line 11 (var.GCP_REGION) to define the provider attributes project and zone.
+
+From the terraform google cloud provider documentation:
+
+"project - (Optional) The default project to manage resources in. If another project is specified on a resource, it will take precedence."
+"region - (Optional) The default region to manage resources in. If another region is specified on a regional resource, it will take precedence."
+
+
+Using input variables makes the configuration files shareable (we can share the configuration files without hard coded values, that can be sensitive credentials for example), and parameterized. 
+For example in our case, we can alter the google provider so that it manages resources in a different region or project by simply changing the values of the variables used (by changing the "terraform-gcp-variables.tf" file or from the command line), without needing to change the "terraform-gcp-provider.tf" file. 

@@ -1,0 +1,15 @@
+vagrant@mgmt:~/examples$ ansible all -m shell -a " uptime "
+web2 | CHANGED | rc=0 >>
+ 14:39:23 up  1:07,  1 user,  load average: 0.01, 0.04, 0.05
+web1 | CHANGED | rc=0 >>
+ 14:39:23 up  1:09,  1 user,  load average: 0.00, 0.01, 0.05
+web3 | CHANGED | rc=0 >>
+ 14:39:24 up  1:05,  1 user,  load average: 0.00, 0.01, 0.05
+web5 | CHANGED | rc=0 >>
+ 14:39:24 up  1:00,  1 user,  load average: 0.01, 0.02, 0.05
+web4 | CHANGED | rc=0 >>
+ 14:39:24 up  1:02,  1 user,  load average: 0.00, 0.01, 0.05
+web6 | CHANGED | rc=0 >>
+ 14:39:30 up 59 min,  1 user,  load average: 0.00, 0.02, 0.05
+balancer | CHANGED | rc=0 >>
+ 14:39:30 up  1:11,  1 user,  load average: 0.08, 0.03, 0.05

@@ -1,0 +1,356 @@
+{
+  "version": 4,
+  "terraform_version": "0.13.5",
+  "serial": 49,
+  "lineage": "a39a6547-8cde-ad41-9d94-71b2acd4faed",
+  "outputs": {
+    "balancer_IP": {
+      "value": "100.64.6.7",
+      "type": "string"
+    },
+    "keypair": {
+      "value": "b3ke",
+      "type": "string"
+    },
+    "private_key": {
+      "value": "-----BEGIN OPENSSH PRIVATE KEY-----\n...\n-----END OPENSSH PRIVATE KEY-----\n",
+      "type": "string"
+    },
+    "public_key": {
+      "value": "ssh-rsa ...\n",
+      "type": "string"
+    },
+    "sec_rules": {
+      "value": [
+        {
+          "cidr": "0.0.0.0/0",
+          "from_group_id": "",
+          "from_port": 443,
+          "id": "af593ed2-5491-4d75-b823-41bcd6a71a7e",
+          "ip_protocol": "tcp",
+          "self": false,
+          "to_port": 443
+        },
+        {
+          "cidr": "0.0.0.0/0",
+          "from_group_id": "",
+          "from_port": 80,
+          "id": "3e7b85e5-2fa0-471a-97fc-9b92e5fa1517",
+          "ip_protocol": "tcp",
+          "self": false,
+          "to_port": 80
+        }
+      ],
+      "type": [
+        "set",
+        [
+          "object",
+          {
+            "cidr": "string",
+            "from_group_id": "string",
+            "from_port": "number",
+            "id": "string",
+            "ip_protocol": "string",
+            "self": "bool",
+            "to_port": "number"
+          }
+        ]
+      ]
+    },
+    "terraform-provider": {
+      "value": "Connected with VM Cloud at var.auth_url",
+      "type": "string"
+    },
+    "web_IPs": {
+      "value": [
+        "web1 = 100.64.6.6",
+        "web2 = 100.64.6.12"
+      ],
+      "type": [
+        "list",
+        "string"
+      ]
+    }
+  },
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "openstack_compute_instance_v2",
+      "name": "balancer",
+      "provider": "provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "access_ip_v4": "100.64.6.7",
+            "access_ip_v6": "[2001:690:2139:87:f816:3eff:fed7:ddd4]",
+            "admin_pass": null,
+            "all_metadata": {},
+            "all_tags": [],
+            "availability_zone": "zone1",
+            "availability_zone_hints": null,
+            "block_device": [],
+            "config_drive": null,
+            "flavor_id": "0",
+            "flavor_name": "t1.nano",
+            "floating_ip": null,
+            "force_delete": false,
+            "id": "cfe664c7-19d1-4f75-bf8b-dda1e106909d",
+            "image_id": "0c43fa1b-c74e-49d4-9a6f-eecd49cad46a",
+            "image_name": "Ubuntu-Bionic-Latest",
+            "key_pair": "b3ke",
+            "metadata": null,
+            "name": "balancer",
+            "network": [
+              {
+                "access_network": false,
+                "fixed_ip_v4": "100.64.6.7",
+                "fixed_ip_v6": "[2001:690:2139:87:f816:3eff:fed7:ddd4]",
+                "floating_ip": "",
+                "mac": "fa:16:3e:d7:dd:d4",
+                "name": "n-AGISIT7-AGISIT-Teams-2",
+                "port": "",
+                "uuid": "3039b85f-b1c0-4a05-afad-df6435bc2d9b"
+              }
+            ],
+            "network_mode": null,
+            "personality": [],
+            "power_state": "active",
+            "region": "RegionA",
+            "scheduler_hints": [],
+            "security_groups": [
+              "default",
+              "sec_ingr"
+            ],
+            "stop_before_destroy": false,
+            "tags": null,
+            "timeouts": null,
+            "user_data": null,
+            "vendor_options": [],
+            "volume": []
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInVwZGF0ZSI6MTgwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "openstack_compute_keypair_v2.keypair",
+            "openstack_compute_secgroup_v2.sec_ingr",
+            "random_string.random_name"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "openstack_compute_instance_v2",
+      "name": "web",
+      "provider": "provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]",
+      "instances": [
+        {
+          "index_key": 0,
+          "schema_version": 0,
+          "attributes": {
+            "access_ip_v4": "100.64.6.6",
+            "access_ip_v6": "[2001:690:2139:87:f816:3eff:fe4d:73b2]",
+            "admin_pass": null,
+            "all_metadata": {},
+            "all_tags": [],
+            "availability_zone": "zone1",
+            "availability_zone_hints": null,
+            "block_device": [],
+            "config_drive": null,
+            "flavor_id": "0",
+            "flavor_name": "t1.nano",
+            "floating_ip": null,
+            "force_delete": false,
+            "id": "163cacd5-8457-4e58-a3eb-284a50e8b88d",
+            "image_id": "0c43fa1b-c74e-49d4-9a6f-eecd49cad46a",
+            "image_name": "Ubuntu-Bionic-Latest",
+            "key_pair": "b3ke",
+            "metadata": null,
+            "name": "web1",
+            "network": [
+              {
+                "access_network": false,
+                "fixed_ip_v4": "100.64.6.6",
+                "fixed_ip_v6": "[2001:690:2139:87:f816:3eff:fe4d:73b2]",
+                "floating_ip": "",
+                "mac": "fa:16:3e:4d:73:b2",
+                "name": "n-AGISIT7-AGISIT-Teams-2",
+                "port": "",
+                "uuid": "3039b85f-b1c0-4a05-afad-df6435bc2d9b"
+              }
+            ],
+            "network_mode": null,
+            "personality": [],
+            "power_state": "active",
+            "region": "RegionA",
+            "scheduler_hints": [],
+            "security_groups": [
+              "default",
+              "sec_ingr"
+            ],
+            "stop_before_destroy": false,
+            "tags": null,
+            "timeouts": null,
+            "user_data": null,
+            "vendor_options": [],
+            "volume": []
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInVwZGF0ZSI6MTgwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "openstack_compute_keypair_v2.keypair",
+            "openstack_compute_secgroup_v2.sec_ingr",
+            "random_string.random_name"
+          ]
+        },
+        {
+          "index_key": 1,
+          "schema_version": 0,
+          "attributes": {
+            "access_ip_v4": "100.64.6.12",
+            "access_ip_v6": "[2001:690:2139:87:f816:3eff:fed5:c89d]",
+            "admin_pass": null,
+            "all_metadata": {},
+            "all_tags": [],
+            "availability_zone": "zone1",
+            "availability_zone_hints": null,
+            "block_device": [],
+            "config_drive": null,
+            "flavor_id": "0",
+            "flavor_name": "t1.nano",
+            "floating_ip": null,
+            "force_delete": false,
+            "id": "d51af900-a4ce-4cc6-9de4-d2c78bd3ad05",
+            "image_id": "0c43fa1b-c74e-49d4-9a6f-eecd49cad46a",
+            "image_name": "Ubuntu-Bionic-Latest",
+            "key_pair": "b3ke",
+            "metadata": null,
+            "name": "web2",
+            "network": [
+              {
+                "access_network": false,
+                "fixed_ip_v4": "100.64.6.12",
+                "fixed_ip_v6": "[2001:690:2139:87:f816:3eff:fed5:c89d]",
+                "floating_ip": "",
+                "mac": "fa:16:3e:d5:c8:9d",
+                "name": "n-AGISIT7-AGISIT-Teams-2",
+                "port": "",
+                "uuid": "3039b85f-b1c0-4a05-afad-df6435bc2d9b"
+              }
+            ],
+            "network_mode": null,
+            "personality": [],
+            "power_state": "active",
+            "region": "RegionA",
+            "scheduler_hints": [],
+            "security_groups": [
+              "default",
+              "sec_ingr"
+            ],
+            "stop_before_destroy": false,
+            "tags": null,
+            "timeouts": null,
+            "user_data": null,
+            "vendor_options": [],
+            "volume": []
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjoxODAwMDAwMDAwMDAwLCJkZWxldGUiOjE4MDAwMDAwMDAwMDAsInVwZGF0ZSI6MTgwMDAwMDAwMDAwMH19",
+          "dependencies": [
+            "openstack_compute_keypair_v2.keypair",
+            "openstack_compute_secgroup_v2.sec_ingr",
+            "random_string.random_name"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "openstack_compute_keypair_v2",
+      "name": "keypair",
+      "provider": "provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "fingerprint": "2e:06:1e:e5:8a:53:af:66:f4:9a:7e:6e:b2:18:fe:d5",
+            "id": "b3ke",
+            "name": "b3ke",
+            "private_key": "",
+            "public_key": "ssh-rsa ...\n",
+            "region": "RegionA",
+            "value_specs": null
+          },
+          "private": "bnVsbA==",
+          "dependencies": [
+            "random_string.random_name"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "openstack_compute_secgroup_v2",
+      "name": "sec_ingr",
+      "provider": "provider[\"registry.terraform.io/terraform-provider-openstack/openstack\"]",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "description": "a security group",
+            "id": "6d26afdf-1d0d-4ffd-9717-12608688a64a",
+            "name": "sec_ingr",
+            "region": "RegionA",
+            "rule": [
+              {
+                "cidr": "0.0.0.0/0",
+                "from_group_id": "",
+                "from_port": 443,
+                "id": "af593ed2-5491-4d75-b823-41bcd6a71a7e",
+                "ip_protocol": "tcp",
+                "self": false,
+                "to_port": 443
+              },
+              {
+                "cidr": "0.0.0.0/0",
+                "from_group_id": "",
+                "from_port": 80,
+                "id": "3e7b85e5-2fa0-471a-97fc-9b92e5fa1517",
+                "ip_protocol": "tcp",
+                "self": false,
+                "to_port": 80
+              }
+            ],
+            "timeouts": null
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiZGVsZXRlIjo2MDAwMDAwMDAwMDB9fQ=="
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "random_string",
+      "name": "random_name",
+      "provider": "provider[\"registry.terraform.io/hashicorp/random\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "id": "b3ke",
+            "keepers": null,
+            "length": 4,
+            "lower": true,
+            "min_lower": 0,
+            "min_numeric": 0,
+            "min_special": 0,
+            "min_upper": 0,
+            "number": true,
+            "override_special": null,
+            "result": "b3ke",
+            "special": false,
+            "upper": false
+          },
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    }
+  ]
+}

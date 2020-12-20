@@ -1,0 +1,6 @@
+vagrant@osmgmt:~/gcpkube-tenant$ kubectl get service
+NAME           TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+frontend       LoadBalancer   10.3.242.46    34.89.247.180   80:31814/TCP   11m
+kubernetes     ClusterIP      10.3.240.1     <none>          443/TCP        14m
+redis-master   ClusterIP      10.3.255.95    <none>          6379/TCP       11m
+redis-slave    ClusterIP      10.3.244.199   <none>          6379/TCP       11m

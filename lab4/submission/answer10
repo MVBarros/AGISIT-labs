@@ -1,0 +1,80 @@
+vagrant@mgmt:~/examples$ time ansible-playbook serial.yml 
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web1]
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web2]
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web3]
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web4]
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web5]
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web6]
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [balancer]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+real    1m24.159s
+user    0m11.824s
+sys     0m2.197s
+
+vagrant@mgmt:~/examples$ time ansible-playbook parallel.yml 
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [sleep for 5 seconds] ******************************************************************************************************************************************************************
+changed: [web5]
+changed: [web1]
+changed: [web2]
+changed: [web3]
+changed: [web4]
+changed: [web6]
+changed: [balancer]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+real    0m26.773s
+user    0m5.376s
+sys     0m2.116s
+
+Both playbooks perform the same plays and tasks. However, parallel.yml runs each task concurrently at all hosts. In practice, the time of execution of the task is the time it takes for the slowest host to finish the task.
+On the other hand, serial.yml runs each task serially, meaning a host only starts a task after the previous host has finished it, making a slower execution. In practice, the time of execution of the task is the sum of the time it takes for each host to finish the task.

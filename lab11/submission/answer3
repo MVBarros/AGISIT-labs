@@ -1,0 +1,7 @@
+vagrant@mininet:~$ sudo ovs-ofctl -O OpenFlow13 dump-flows s2
+OFPST_FLOW reply (OF1.3) (xid=0x2):
+ cookie=0x2b00000000000015, duration=5.243s, table=0, n_packets=3, n_bytes=210, priority=2,in_port=3 actions=output:2,output:1
+ cookie=0x2b00000000000017, duration=5.238s, table=0, n_packets=7, n_bytes=490, priority=2,in_port=1 actions=output:3,output:2
+ cookie=0x2b00000000000016, duration=5.24s, table=0, n_packets=3, n_bytes=210, priority=2,in_port=2 actions=output:3,output:1
+ cookie=0x2b00000000000008, duration=10.937s, table=0, n_packets=11, n_bytes=935, priority=100,dl_type=0x88cc actions=CONTROLLER:65535
+ cookie=0x2b00000000000008, duration=10.937s, table=0, n_packets=22, n_bytes=1760, priority=0 actions=drop

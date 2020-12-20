@@ -1,0 +1,34 @@
+---
+- hosts: all
+  become: yes
+  become_method: sudo
+  gather_facts: no
+
+  tasks:
+
+  - name: install ntp
+    apt:
+      name: ntp
+      state: present
+      update_cache: yes
+
+  - name: write our ntp.conf
+    copy:
+      src: /home/vagrant/examples/files/ntp.conf
+      dest: /etc/ntp.conf
+      mode: '0644'
+      owner: root
+      group: root
+    notify: restart ntp
+
+  - name: start ntp
+    service:
+      name: ntp
+      state: started
+
+  handlers:
+
+  - name: restart ntp
+    service:
+      name: ntp
+      state: restarted

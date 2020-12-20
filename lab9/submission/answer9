@@ -1,0 +1,137 @@
+*******************
+***11 webservers***
+*******************
+
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 34.89.253.150 (be patient)
+Completed 10000 requests
+Completed 20000 requests
+Completed 30000 requests
+Completed 40000 requests
+Completed 50000 requests
+Completed 60000 requests
+Completed 70000 requests
+Completed 80000 requests
+Completed 90000 requests
+Completed 100000 requests
+Finished 100000 requests
+
+
+Server Software:        nginx/1.18.0
+Server Hostname:        34.89.253.150
+Server Port:            80
+
+Document Path:          /
+Document Length:        1000 bytes
+
+Concurrency Level:      10
+Time taken for tests:   698.759 seconds
+Complete requests:      100000
+Failed requests:        45454
+   (Connect: 0, Receive: 0, Length: 45454, Exceptions: 0)
+Total transferred:      124209092 bytes
+HTML transferred:       99954546 bytes
+Requests per second:    143.11 [#/sec] (mean)
+Time per request:       69.876 [ms] (mean)
+Time per request:       6.988 [ms] (mean, across all concurrent requests)
+Transfer rate:          173.59 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       33   35  15.1     34    1061
+Processing:    33   35   3.2     35     300
+Waiting:       33   35   3.2     35     300
+Total:         66   70  15.5     70    1096
+
+Percentage of the requests served within a certain time (ms)
+  50%     70
+  66%     70
+  75%     71
+  80%     72
+  90%     72
+  95%     73
+  98%     73
+  99%     73
+ 100%   1096 (longest request)
+
+********************
+****5 webservers****
+********************
+
+This is ApacheBench, Version 2.3 <$Revision: 1879490 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 34.89.253.150 (be patient)
+Completed 10000 requests
+Completed 20000 requests
+Completed 30000 requests
+Completed 40000 requests
+Completed 50000 requests
+Completed 60000 requests
+Completed 70000 requests
+Completed 80000 requests
+Completed 90000 requests
+Completed 100000 requests
+Finished 100000 requests
+
+
+Server Software:        nginx/1.18.0
+Server Hostname:        34.89.253.150
+Server Port:            80
+
+Document Path:          /
+Document Length:        999 bytes
+
+Concurrency Level:      10
+Time taken for tests:   697.112 seconds
+Complete requests:      100000
+Failed requests:        40000
+   (Connect: 0, Receive: 0, Length: 40000, Exceptions: 0)
+Total transferred:      124180000 bytes
+HTML transferred:       99940000 bytes
+Requests per second:    143.45 [#/sec] (mean)
+Time per request:       69.711 [ms] (mean)
+Time per request:       6.971 [ms] (mean, across all concurrent requests)
+Transfer rate:          173.96 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       33   35  10.7     34    1060
+Processing:    33   35   2.8     35     296
+Waiting:       33   35   2.8     35     296
+Total:         66   70  11.1     70    1097
+
+Percentage of the requests served within a certain time (ms)
+  50%     70
+  66%     70
+  75%     71
+  80%     72
+  90%     72
+  95%     72
+  98%     73
+  99%     73
+ 100%   1097 (longest request)
+
+Note: The number of failed requests is misleading. The benchmark tool marks requests with different content length as failed when in reality the haproxy stats page shows that no requests were dropped.
+
+Analysing the benchmark results, there was no significant variation in latency (measures in time per request) and throughput (measured in requests per second) when using 11 webservers versus 5 webservers. Aditionally, no requests were dropped.
+
+This means the system in both cases is able to easily handle the load of the benchmark. 
+
+Analysing the proxy stats page after running each benchmark, we know:
+* in the first benchmark (11 webservers) each webserver is only ever processing one request at the same time (max sessions is one).
+* in the second benchmark (5 webservers) each webserver is processing two requests at once (max sessions is two).
+
+This values make sense since 10 requests are sent at once and they are asssigned in a round robin fashion.
+
+Despite the fact that in the second benchmark each webserver is processing the double of requests at any given time (and since we know each server only has one virtual cpu core), the time per request stays the same.
+
+We can thus infer that the latency of a request we experience comes not from processing each request but from other factors (most likely it can be attributed to the network).
+
+The throughput (requests/second) on the other hand is the result of the formula: <concurrency parameter> * 1000 / <mean time per request in ms>.
+
+Since we have not yet saturated the system, we can expect that incresing the concurrency level will increase the throughput until we reach an inflection point where the system is stressed and can not handle more concurrent requests. 

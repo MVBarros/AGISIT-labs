@@ -1,0 +1,8 @@
+vagrant@osmgmt:~/gcpkube-tenant$ kubectl get pods
+NAME                 READY   STATUS    RESTARTS   AGE
+frontend-fglh8       1/1     Running   0          10m
+frontend-hdvz4       1/1     Running   0          10m
+frontend-jg8pr       1/1     Running   0          10m
+redis-master-fswpq   1/1     Running   0          10m
+redis-slave-jfkf8    1/1     Running   0          10m
+redis-slave-tw6fq    1/1     Running   0          10m

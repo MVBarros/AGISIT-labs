@@ -1,0 +1,52 @@
+vagrant@mgmt:~/examples$ ansible-playbook ntp-install.yml 
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [install ntp] **************************************************************************************************************************************************************************
+changed: [web1]
+changed: [web3]
+changed: [web4]
+changed: [web5]
+changed: [web2]
+changed: [web6]
+changed: [balancer]
+
+TASK [write our ntp.conf] *******************************************************************************************************************************************************************
+changed: [web4]
+changed: [web3]
+changed: [web2]
+changed: [web5]
+changed: [web1]
+changed: [web6]
+changed: [balancer]
+
+TASK [start ntp] ****************************************************************************************************************************************************************************
+ok: [web2]
+ok: [web4]
+ok: [web5]
+ok: [web3]
+ok: [web1]
+ok: [web6]
+ok: [balancer]
+
+RUNNING HANDLER [restart ntp] ***************************************************************************************************************************************************************
+changed: [web4]
+changed: [web5]
+changed: [web2]
+changed: [web1]
+changed: [web3]
+changed: [web6]
+changed: [balancer]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=4    changed=3    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Interpretation: The command results in the 3 tasks and one handler being successfull in all hosts (with the same output), with the "install ntp" and "write out ntp.conf" tasks and the "restart ntp" handler outputing changed and the "start ntp" task returning ok.
+
+The sequence of execution in the hosts is: 1. "install ntp", 2. "write out ntp.conf", 3. "restart ntp", 4. "start ntp". The handler executes before the "start ntp" task has it is triggered by the "write out ntp.conf" task. The handler restarts the ntp service. This causes the "start ntp" task to not cause any changes since the ntp service was already started (thus it outputs ok, not changed).

@@ -1,0 +1,67 @@
+Before bugfix:
+
+vagrant@mgmt:~/examples$ ansible all -m shell -a "ntpq -p"
+web4 | CHANGED | rc=0 >>
+No association ID's returned
+web2 | CHANGED | rc=0 >>
+No association ID's returned
+web3 | CHANGED | rc=0 >>
+No association ID's returned
+web1 | CHANGED | rc=0 >>
+No association ID's returned
+web5 | CHANGED | rc=0 >>
+No association ID's returned
+balancer | CHANGED | rc=0 >>
+No association ID's returned
+web6 | CHANGED | rc=0 >>
+No association ID's returned
+
+After bugfix: 
+
+vagrant@mgmt:~/examples$ ansible all -m shell -a "ntpq -p"
+web3 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ns2.alza.is     85.199.214.98    2 u   20   64    1   86.402  702.907   0.000
+web5 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ams.aput.net    131.176.107.13   2 u   20   64    1   47.291  483.770   0.008
+web2 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ router-vzb.serv 5.196.192.58     3 u   19   64    1   63.452  745.058   0.000
+balancer | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ loginnode.szege .INIT.          16 u    -   64    0    0.000    0.000   0.000
+web6 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ ntp8.flashdance 194.58.202.20    2 u   19   64    1   93.620  573.498   0.000
+web1 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ 85.199.214.98   .GPS.            1 u   20   64    1   60.807  800.537   0.015
+web4 | CHANGED | rc=0 >>
+     remote           refid      st t when poll reach   delay   offset  jitter
+==============================================================================
+ 82.141.189.10   148.6.0.1        3 u   20   64    1   80.498  658.289   0.000
+
+
+Interpretation:
+
+Before the bug fix the command "ntpq -p" returned the message "No association ID's returned" for all hosts. This happended because the ntp server address written to the /etc/ntp.conf file in the hosts was invalid.
+Analysing the playbook, we can see it uses the template module with the src parameter set to /home/vagrant/examples/files/ntp.conf.j2. 
+Analysing this file, we can see it is a Jinja2 file, that the template module will render onto the host machines.
+
+Specifically, the bug causes a misconfiguration in line 7: "server {{ noc_ntpserver }}" 
+
+{{ noc_ntpserver }} will be replaced with the noc_ntpserver variable in the ntp-template.yml file, so line 7 will become: "server server 0.europe.pool.ntp.org", an invalid configuration.
+
+It should be server 0.europe.pool.ntp.org
+
+The bugfix employed was to change the noc_ntpserver variable in the ntp-template.yml to just "0.europe.pool.ntp.org"
+
+
+

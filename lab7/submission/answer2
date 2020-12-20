@@ -1,0 +1,16 @@
+The file declares a set of resources. Resources are infrastructure objects, such as virtual networks, compute instances, or higher-level components such as DNS records.
+
+In this case, only one resource is declared:
+
+sec_ingr:
+    Resource of type openstack_compute_secgroup_v2. Declares a V2 security group resource within OpenStack.
+    The arguments used to define this resource are:
+        name:  A unique name for the security group. Changing this updates the name of an existing security group.
+        description: A description for the security group. Changing this updates the description of an existing security group.
+        rule: A rule describing how the security group operates. Changing this updates the security group rules. Multiple rule arguments may be used. The rule object structure is:
+            from_port: An integer representing the lower bound of the port range to open. Changing this creates a new security group rule.
+            to_port: An integer representing the upper bound of the port range to open. Changing this creates a new security group rule.
+            ip_protocol:  The protocol type that will be allowed. Changing this creates a new security group rule.
+            cidr: The IP range that will be the source of network traffic to the security group. Use 0.0.0.0/0 to allow all IP addresses. Changing this creates a new security group rule.
+
+The sec_ingr resource defines an openstack security group, with name "sec_ingr", description "a security group" and two rules allowing tcp trafic from any IP address to ports 80 and 443.

@@ -1,0 +1,14 @@
+The outputs.tf file describes the values printed in the CLI after running the apply command.
+
+Each output is declared in an output block. Each output block has an identifier, and some arguments. In this case, the arguments used are:
+  value: The value argument takes an expression whose result is to be returned to the user. Any valid expression is allowed as an output value.
+  description: The description should concisely explain the purpose of the output and what kind of value is expected.
+
+In this case, 6 outputs are declared:
+  "sec_rules": The rules of the sec_ingr security group resource declared in the "terraform-vmcloud-networks.tf" file with identifier "sec_ingr".
+  "private key": the content of a private key (in this case the private key part of the keypair generated in step 4 of the assignment)
+  "public key": the content of a public key (in this case the public key part of the keypair generated in step 4 of the assignment)
+  "keypair": The name of the keypair resource declared in the "terraform-vmcloud-servers.tf" file, with identifier "keypair"
+  "web_IPs": The name and ipv4 address of the openstack compute instance resources, declared in the "terraform-vmcloud-servers.tf" file, with identifier "web"
+  "balancer_IP": The ipv4 address of the openstack compute instance, declared in the "terraform-vmcloud-servers.tf" file, with identifier "balancer"
+sec_rules

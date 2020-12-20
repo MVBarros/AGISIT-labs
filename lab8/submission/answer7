@@ -1,0 +1,9 @@
+3589a48af9a8674e3b88ea600dcacc092e89b6ff (HEAD -> master, tag: vmcloud-conf-ist187691) Update ansible files
+1c343b357783f7b1786f641fbf8ea0196294f9f4 (tag: vmcloud-prov-ist187691) Files for provisioning
+f11ccb3492cc6f2d5a44dc3987f30e4ab9ad9a76 (origin/master, origin/HEAD) Fix deprecation warning when running apply command
+896cb7409ef2136689123487826a5b374c0c1668 Update gitignore for new assignment
+7fea7655a7d432020e987d330f60e8af937ab680 Add Daniela to group membership
+6efd566f99affd106fe66b74f226aa80d0a3a35e Add my name to README
+13fca8164e5f6b8dd5e174332914d13516873688 fix issue with table on readme
+3483a8fae0e92e8fd02d2437cb2db2412d89be04 Add table to readme. Add Carolina to group members
+6ef1b3dd04da47f03630e15153e691d8aa426836 initial commit of repo

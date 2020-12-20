@@ -1,0 +1,17 @@
+Some of the variables used in the configuration files are:
+
+ansible_hostname - Hostname of the current host
+
+hostvars - dictionary storing an entry for each inventory host. Allows the retrieval of ansible facts about remote hosts or about ansible itself (magic variables)
+
+ansible_facts - data related to the remote system,  including operating systems, IP addresses, attached filesystems, and more.
+
+ansible_facts.eth1.ipv4.address - ipv4 address of the remote system (using the network interface eth1)
+
+hostvars[host]['ansible_facts']['eth1']['ipv4']['address'] - ipv4 address of the remote system identified by the "host" variable (identities of each host are defined in the iventory.ini file) (using the network interface eth1)
+
+groups - dictionary matching for each group (groups are defined in the iventory.ini file) the hosts belonging to that group
+
+ansible_managed - By default, it's value is "Ansible managed". The default value is used to indicate to people reading the file that Ansible is managing it, so it should not be altered.
+
+The difference between "normal" files and template files is that template files are written in a specific language, that is then processed by a templating engine to produce a "normal file". For example, for .j2 files, the templating language is Jinja, and it is processed by the jinja template engine, that replaces variable names (that are encapsulated by {{ }}) with their values and processes instructions (encapsulated by {% %}).

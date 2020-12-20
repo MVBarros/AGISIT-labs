@@ -1,0 +1,12 @@
+
+Name	Type	Status	Visibility	Protected	Disk Format	Size 	
+CentOS-7-Latest 	Image 	Active 	Public 	Yes 	RAW 	1.16 GB 	
+CentOS-8-Latest 	Image 	Active 	Public 	Yes 	RAW 	1.51 GB 	
+CirrOS 			Image 	Active 	Public 	No 	RAW 	112.00 MB 	
+Cirros 			Image 	Active 	Public 	Yes 	QCOW2 	12.67 MB 	
+Debian-Buster-Latest 	Image 	Active 	Public 	Yes 	RAW 	1.61 GB 	
+Debian-Stretch-Latest 	Image 	Active 	Public 	Yes 	RAW 	1.38 GB 	
+Debian-Testing-Latest 	Image 	Active 	Public 	Yes 	RAW 	2.00 GB 	
+Ubuntu-Bionic-Latest 	Image 	Active 	Public 	Yes 	RAW 	2.67 GB 	
+Ubuntu-Focal-Latest 	Image 	Active 	Public 	Yes 	RAW 	3.40 GB 	
+Ubuntu-Xenial-Latest 	Image 	Active 	Public 	Yes 	RAW 	2.27 GB

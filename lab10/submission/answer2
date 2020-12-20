@@ -1,0 +1,8 @@
+The number of nodes is defined when creating the "google_container_cluster" resource in the "gcp_gke" module. This has an initial_number_count of 3, which means that each zone in the region "europe-west3" of the cluster will contain 3 nodes. 
+Since there are 3 zibes in this region ("europe-west3-a", "europe-west3-b", "europe-west3-c"), this results in a total of 9 nodes, which we can confirm in the google cloud console
+
+The pods configuration file defines 1 pod replica running redis in the master role, 2 pod replicas running redis in the slave role and 3 pod replicas running the guestbook application, for a total of 6 pods.
+
+The nodes will run the set of container applications defined for each pod (in our case each pod runs only one container application). These pods will be distributed through the worker nodes of the cluster.
+
+The extra 3 nodes in the cluster are the management nodes. There are 3 of them because the regional cluster is in three zones, and each zone has it's replica of the control plane

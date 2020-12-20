@@ -1,0 +1,21 @@
+Frontend statistics: The frontend is what the client connects to (the HAProxy load balancer). As requests enter the load balancer—and as responses are returned to the client—they pass through the frontend. So, it has access to end-to-end timings, message sizes, and health indicators that encompass the whole request/response lifecycle.
+
+    Session Rate: The rate at which clients are connecting to HAProxy.
+    Sessions: Number of sessions, or full client-to-server connections, in use on the load balancer.
+    Bytes: Cumulative amount of data sent(out) and received(in) between HAProxy and downstream clients.
+    Denied: number of requests and responses that were rejected because of security concerns. 
+    Server: The only field from the Server section that applies to a frontend is the Status field. (indicates OPEN if the frontend is operating normally and ready to receive traffic and STOP if it is disabled)
+
+Backend statistics: A backend is a pool of load-balanced servers. HAProxy sends requests to a backend and then receives a response from one of the active servers. Statistics here include information about the health of each server, timings related to queuing, connecting, and getting a response, and requests rates.
+    Queue:  how many clients connections are waiting for a server to become available.
+    Session Rate: These statistics show the rate at which sessions (connections) are being made to a server.
+    Sessions: the number of current sessions (connections) to any of the active servers.
+    Bytes: the amount of data sent(in) and received(out) between HAProxy and the upstream server.
+    Denied: number of requests and responses that were rejected because of security concerns.
+    Errors: number of errors related to communicating with a backend server.
+    Warnings: number of connection retries (Retr) and connection redispatches (Redis). A connection redispatch happens when HAProxy fails to establish a connection to a server and redispatches it to another server. 
+    Server: various details about the status, health and weight (proportion of traffic it will accept) of each server.
+
+The ones that change on the frontend are: total ammount of sessions (as one session is created for each request of the benchmark) and bytes in and out.
+
+The ones that change on the backend are: total ammount of sessions (as one session is created for each request of the benchmark) and bytes in and out.

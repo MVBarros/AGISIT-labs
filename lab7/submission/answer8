@@ -1,0 +1,274 @@
+
+An execution plan has been generated and is shown below.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # openstack_compute_instance_v2.balancer will be created
+  + resource "openstack_compute_instance_v2" "balancer" {
+      + access_ip_v4        = (known after apply)
+      + access_ip_v6        = (known after apply)
+      + all_metadata        = (known after apply)
+      + all_tags            = (known after apply)
+      + availability_zone   = (known after apply)
+      + flavor_id           = (known after apply)
+      + flavor_name         = "t1.nano"
+      + force_delete        = false
+      + id                  = (known after apply)
+      + image_id            = (known after apply)
+      + image_name          = "Ubuntu-Bionic-Latest"
+      + key_pair            = (known after apply)
+      + name                = "balancer"
+      + power_state         = "active"
+      + region              = (known after apply)
+      + security_groups     = [
+          + "default",
+          + "sec_ingr",
+        ]
+      + stop_before_destroy = false
+
+      + network {
+          + access_network = false
+          + fixed_ip_v4    = (known after apply)
+          + fixed_ip_v6    = (known after apply)
+          + floating_ip    = (known after apply)
+          + mac            = (known after apply)
+          + name           = "n-AGISIT7-AGISIT-Teams-2"
+          + port           = (known after apply)
+          + uuid           = (known after apply)
+        }
+    }
+
+  # openstack_compute_instance_v2.web[0] will be created
+  + resource "openstack_compute_instance_v2" "web" {
+      + access_ip_v4        = (known after apply)
+      + access_ip_v6        = (known after apply)
+      + all_metadata        = (known after apply)
+      + all_tags            = (known after apply)
+      + availability_zone   = (known after apply)
+      + flavor_id           = (known after apply)
+      + flavor_name         = "t1.nano"
+      + force_delete        = false
+      + id                  = (known after apply)
+      + image_id            = (known after apply)
+      + image_name          = "Ubuntu-Bionic-Latest"
+      + key_pair            = (known after apply)
+      + name                = "web1"
+      + power_state         = "active"
+      + region              = (known after apply)
+      + security_groups     = [
+          + "default",
+          + "sec_ingr",
+        ]
+      + stop_before_destroy = false
+
+      + network {
+          + access_network = false
+          + fixed_ip_v4    = (known after apply)
+          + fixed_ip_v6    = (known after apply)
+          + floating_ip    = (known after apply)
+          + mac            = (known after apply)
+          + name           = "n-AGISIT7-AGISIT-Teams-2"
+          + port           = (known after apply)
+          + uuid           = (known after apply)
+        }
+    }
+
+  # openstack_compute_instance_v2.web[1] will be created
+  + resource "openstack_compute_instance_v2" "web" {
+      + access_ip_v4        = (known after apply)
+      + access_ip_v6        = (known after apply)
+      + all_metadata        = (known after apply)
+      + all_tags            = (known after apply)
+      + availability_zone   = (known after apply)
+      + flavor_id           = (known after apply)
+      + flavor_name         = "t1.nano"
+      + force_delete        = false
+      + id                  = (known after apply)
+      + image_id            = (known after apply)
+      + image_name          = "Ubuntu-Bionic-Latest"
+      + key_pair            = (known after apply)
+      + name                = "web2"
+      + power_state         = "active"
+      + region              = (known after apply)
+      + security_groups     = [
+          + "default",
+          + "sec_ingr",
+        ]
+      + stop_before_destroy = false
+
+      + network {
+          + access_network = false
+          + fixed_ip_v4    = (known after apply)
+          + fixed_ip_v6    = (known after apply)
+          + floating_ip    = (known after apply)
+          + mac            = (known after apply)
+          + name           = "n-AGISIT7-AGISIT-Teams-2"
+          + port           = (known after apply)
+          + uuid           = (known after apply)
+        }
+    }
+
+  # openstack_compute_keypair_v2.keypair will be created
+  + resource "openstack_compute_keypair_v2" "keypair" {
+      + fingerprint = (known after apply)
+      + id          = (known after apply)
+      + name        = (known after apply)
+      + private_key = (known after apply)
+      + public_key  = <<~EOT
+            ssh-rsa ...
+        EOT
+      + region      = (known after apply)
+    }
+
+  # openstack_compute_secgroup_v2.sec_ingr will be created
+  + resource "openstack_compute_secgroup_v2" "sec_ingr" {
+      + description = "a security group"
+      + id          = (known after apply)
+      + name        = "sec_ingr"
+      + region      = (known after apply)
+
+      + rule {
+          + cidr        = "0.0.0.0/0"
+          + from_port   = 443
+          + id          = (known after apply)
+          + ip_protocol = "tcp"
+          + self        = false
+          + to_port     = 443
+        }
+      + rule {
+          + cidr        = "0.0.0.0/0"
+          + from_port   = 80
+          + id          = (known after apply)
+          + ip_protocol = "tcp"
+          + self        = false
+          + to_port     = 80
+        }
+    }
+
+  # random_string.random_name will be created
+  + resource "random_string" "random_name" {
+      + id          = (known after apply)
+      + length      = 4
+      + lower       = true
+      + min_lower   = 0
+      + min_numeric = 0
+      + min_special = 0
+      + min_upper   = 0
+      + number      = true
+      + result      = (known after apply)
+      + special     = false
+      + upper       = false
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + balancer_IP        = (known after apply)
+  + keypair            = (known after apply)
+  + private_key        = <<~EOT
+        -----BEGIN OPENSSH PRIVATE KEY-----
+        ...
+        -----END OPENSSH PRIVATE KEY-----
+    EOT
+  + public_key         = <<~EOT
+        ssh-rsa ...
+    EOT
+  + sec_rules          = [
+      + {
+          + cidr          = "0.0.0.0/0"
+          + from_group_id = ""
+          + from_port     = 443
+          + id            = (known after apply)
+          + ip_protocol   = "tcp"
+          + self          = false
+          + to_port       = 443
+        },
+      + {
+          + cidr          = "0.0.0.0/0"
+          + from_group_id = ""
+          + from_port     = 80
+          + id            = (known after apply)
+          + ip_protocol   = "tcp"
+          + self          = false
+          + to_port       = 80
+        },
+    ]
+  + terraform-provider = "Connected with VM Cloud at var.auth_url"
+  + web_IPs            = [
+      + (known after apply),
+      + (known after apply),
+    ]
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+random_string.random_name: Creating...
+random_string.random_name: Creation complete after 0s [id=b3ke]
+openstack_compute_secgroup_v2.sec_ingr: Creating...
+openstack_compute_keypair_v2.keypair: Creating...
+openstack_compute_keypair_v2.keypair: Creation complete after 1s [id=b3ke]
+openstack_compute_secgroup_v2.sec_ingr: Creation complete after 2s [id=6d26afdf-1d0d-4ffd-9717-12608688a64a]
+openstack_compute_instance_v2.web[1]: Creating...
+openstack_compute_instance_v2.web[0]: Creating...
+openstack_compute_instance_v2.balancer: Creating...
+openstack_compute_instance_v2.web[1]: Still creating... [10s elapsed]
+openstack_compute_instance_v2.web[0]: Still creating... [11s elapsed]
+openstack_compute_instance_v2.balancer: Still creating... [10s elapsed]
+openstack_compute_instance_v2.web[1]: Still creating... [20s elapsed]
+openstack_compute_instance_v2.web[0]: Still creating... [21s elapsed]
+openstack_compute_instance_v2.balancer: Still creating... [20s elapsed]
+openstack_compute_instance_v2.web[1]: Still creating... [31s elapsed]
+openstack_compute_instance_v2.web[0]: Still creating... [31s elapsed]
+openstack_compute_instance_v2.balancer: Still creating... [30s elapsed]
+openstack_compute_instance_v2.web[1]: Still creating... [41s elapsed]
+openstack_compute_instance_v2.balancer: Still creating... [40s elapsed]
+openstack_compute_instance_v2.web[0]: Still creating... [41s elapsed]
+openstack_compute_instance_v2.web[1]: Still creating... [51s elapsed]
+openstack_compute_instance_v2.balancer: Still creating... [50s elapsed]
+openstack_compute_instance_v2.web[0]: Still creating... [51s elapsed]
+openstack_compute_instance_v2.web[1]: Creation complete after 55s [id=d51af900-a4ce-4cc6-9de4-d2c78bd3ad05]
+openstack_compute_instance_v2.web[0]: Creation complete after 55s [id=163cacd5-8457-4e58-a3eb-284a50e8b88d]
+openstack_compute_instance_v2.balancer: Creation complete after 54s [id=cfe664c7-19d1-4f75-bf8b-dda1e106909d]
+
+Apply complete! Resources: 6 added, 0 changed, 0 destroyed.
+
+Outputs:
+
+balancer_IP = 100.64.6.7
+keypair = b3ke
+private_key = -----BEGIN OPENSSH PRIVATE KEY-----
+...
+-----END OPENSSH PRIVATE KEY-----
+
+public_key = ssh-rsa ...
+
+sec_rules = [
+  {
+    "cidr" = "0.0.0.0/0"
+    "from_group_id" = ""
+    "from_port" = 443
+    "id" = "af593ed2-5491-4d75-b823-41bcd6a71a7e"
+    "ip_protocol" = "tcp"
+    "self" = false
+    "to_port" = 443
+  },
+  {
+    "cidr" = "0.0.0.0/0"
+    "from_group_id" = ""
+    "from_port" = 80
+    "id" = "3e7b85e5-2fa0-471a-97fc-9b92e5fa1517"
+    "ip_protocol" = "tcp"
+    "self" = false
+    "to_port" = 80
+  },
+]
+terraform-provider = Connected with VM Cloud at var.auth_url
+web_IPs = [
+  "web1 = 100.64.6.6",
+  "web2 = 100.64.6.12",
+]

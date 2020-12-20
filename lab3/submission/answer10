@@ -1,0 +1,24 @@
+vagrant@mgmt:~/examples$ ansible-playbook ntp-remove.yml
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [remove ntp] ***************************************************************************************************************************************************************************
+changed: [web1]
+changed: [web4]
+changed: [web2]
+changed: [web3]
+changed: [web5]
+changed: [balancer]
+changed: [web6]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=1    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Interpretation: This playbook runs a single task that uses the apt builtin ansible module to uninstall the ntp software package (i.e. it runs a command equivalent to apt-get remove ntp).
+It was successful in all hosts and outputed changed, since all hosts had the ntp package installed (if they had not it would output ok, not changed).

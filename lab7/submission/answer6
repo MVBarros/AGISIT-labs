@@ -1,0 +1,9 @@
+The apply command starts by generating a plan, that specifies what actions are necessary to achieve the desired state specified in the configuration files (that are declarative, describe a desired state, not steps to reach them).
+
+The command prints the execution plan (since no infrastructure has been created yet, the plan consists of creating all infrastructure from scratch).
+
+Terraform then prompts the user for confirmation, creates the infrastructure (periodically printing the resource being created).
+
+After the plan is finished, enumerates the resources created, changed and destroyed (in this case 6 resources were only created, none were altered or destroyed).
+
+Finally, terraform prints the outputs defined in the "outputs.tf" file, namely the ip of the web and balancer machines, the rules of the created security group, the openstack keypair name and the public and private key.

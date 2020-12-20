@@ -1,0 +1,27 @@
+The site.yml defines three plays:
+
+The common play is applied to all hosts, and consists of a single task that installs the git software package in all hosts using the apt package manager.
+
+The web play is applied to the web hosts (i.e. web1-web6). It constists of 4 tasks:
+
+    The "install nginx" task installs the nginx software package using the apt packamge manager
+
+    The "write our nginx.conf" task renders the jinja template found at /home/vagrant/examples/frontend_templates/nginx.conf.j2 to /etc/ngnix/nginx.conf in the remote hosts. It notifies the "restart nginx" handler.
+
+    The "write our /etc/nginx/sites-available/default" task renders the jinja template found at /home/vagrant/examples/frontend_templates/default-site.j2 to /etc/nginx/sites-available/default in the remote hosts. It notifies the "restart nginx" handler.
+
+    The "deploy website content" task renders the jinja template found at /home/vagrant/examples/frontend_templates/index.html.j2 to /usr/share/nginx/html/index.html in the remote hosts. 
+
+The balancer play is applied to the balancer machine. It consists of 6 tasks:
+
+    The "update /etc/hosts file for name resolution of self" task replaces a line in the /etc/hosts file of the remote host matching the regexp parameter with the content of the line parameter (or adds a line if no match is found). 
+
+    The "update /etc/hosts file for name resolution" task replaces a line in the /etc/hosts file of the remote host matching the regexp parameter with the line parameter (or adds a line if the regexp does not match any line). It replaces/adds one line for every webserver defined in the groups.web ansible fact if they have an ipv4 ip address.
+
+    The "install haproxy and socat" task install the 'haproxy' and 'socat' software packages using the apt package manager
+
+    The "enable haproxy" task replaces a line in the /etc/default/haproxy" file of the remote host matching the regexp parameter with the content of the line parameter (or adds a line if no match is found)
+
+    The "deploy haproxy config" task renders the jinja template found at /home/vagrant/examples/frontend_templates/haproxy.cfg.j2 to etc/haproxy/haproxy.cfg in the remote hosts. It notifies the "restart haproxy" handler. The file is validated before being copied, with the command passed in the validate parameter.
+
+    The "Ensure HAProxy is started and enabled on boot." starts the haproxy system service (if it is not already started), and enables it, meaning it will be started everytime the machine boots

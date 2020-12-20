@@ -1,0 +1,222 @@
+vagrant@mgmt:~/examples$ ansible-playbook site.yml 
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [web2]
+ok: [web1]
+ok: [web3]
+ok: [web5]
+ok: [web4]
+ok: [balancer]
+ok: [web6]
+
+TASK [install git] **************************************************************************************************************************************************************************
+changed: [web4]
+changed: [web5]
+changed: [web3]
+changed: [web2]
+changed: [web1]
+changed: [web6]
+changed: [balancer]
+
+PLAY [web] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [web2]
+ok: [web1]
+ok: [web3]
+ok: [web4]
+ok: [web5]
+ok: [web6]
+
+TASK [install nginx] ************************************************************************************************************************************************************************
+changed: [web1]
+changed: [web2]
+changed: [web4]
+changed: [web3]
+changed: [web5]
+changed: [web6]
+
+TASK [write our nginx.conf] *****************************************************************************************************************************************************************
+changed: [web5]
+changed: [web3]
+changed: [web1]
+changed: [web2]
+changed: [web4]
+changed: [web6]
+
+TASK [write our /etc/nginx/sites-available/default] *****************************************************************************************************************************************
+changed: [web1]
+changed: [web2]
+changed: [web3]
+changed: [web4]
+changed: [web5]
+changed: [web6]
+
+TASK [deploy website content] ***************************************************************************************************************************************************************
+changed: [web1]
+changed: [web2]
+changed: [web3]
+changed: [web4]
+changed: [web5]
+changed: [web6]
+
+RUNNING HANDLER [restart nginx] *************************************************************************************************************************************************************
+changed: [web3]
+changed: [web1]
+changed: [web5]
+changed: [web4]
+changed: [web2]
+changed: [web6]
+
+PLAY [lb] ***********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [balancer]
+
+TASK [update /etc/hosts file for name resolution of self] ***********************************************************************************************************************************
+changed: [balancer] => (item=balancer)
+
+TASK [update /etc/hosts file for name resolution] *******************************************************************************************************************************************
+changed: [balancer] => (item=web1)
+changed: [balancer] => (item=web2)
+changed: [balancer] => (item=web3)
+changed: [balancer] => (item=web4)
+changed: [balancer] => (item=web5)
+changed: [balancer] => (item=web6)
+
+TASK [install haproxy and socat] ************************************************************************************************************************************************************
+changed: [balancer]
+
+TASK [enable haproxy] ***********************************************************************************************************************************************************************
+changed: [balancer]
+
+TASK [deploy haproxy config] ****************************************************************************************************************************************************************
+changed: [balancer]
+
+TASK [Ensure HAProxy is started and enabled on boot.] ***************************************************************************************************************************************
+changed: [balancer]
+
+RUNNING HANDLER [restart haproxy] ***********************************************************************************************************************************************************
+changed: [balancer]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=10   changed=8    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=8    changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+All tasks were successfull for all plays. 
+As expected, the tasks related to the common play are executed on all hosts, those related to the web play are executed on the webservers (web1-web6) and thos related to the balancer play are applied only to the load balancer
+
+Before each play, a Gathering facts task is executed. This happens because the plays have the gathering facts parameter set to true. This collects facts about the remote hosts that are then used in the template files (for example, the OS, IP, mounted file systems). Since this task produces no changes in the host it outputs "ok". Tasks that produce changes in the host output "changed".
+
+Running the playbook again produces the output:
+
+vagrant@mgmt:~/examples$ ansible-playbook site.yml 
+
+PLAY [all] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [web5]
+ok: [web1]
+ok: [web4]
+ok: [web3]
+ok: [web2]
+ok: [balancer]
+ok: [web6]
+
+TASK [install git] **************************************************************************************************************************************************************************
+ok: [web2]
+ok: [web5]
+ok: [web3]
+ok: [web4]
+ok: [web1]
+ok: [web6]
+ok: [balancer]
+
+PLAY [web] **********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [web1]
+ok: [web2]
+ok: [web3]
+ok: [web4]
+ok: [web5]
+ok: [web6]
+
+TASK [install nginx] ************************************************************************************************************************************************************************
+ok: [web1]
+ok: [web2]
+ok: [web3]
+ok: [web5]
+ok: [web4]
+ok: [web6]
+
+TASK [write our nginx.conf] *****************************************************************************************************************************************************************
+ok: [web4]
+ok: [web2]
+ok: [web1]
+ok: [web5]
+ok: [web3]
+ok: [web6]
+
+TASK [write our /etc/nginx/sites-available/default] *****************************************************************************************************************************************
+ok: [web1]
+ok: [web2]
+ok: [web3]
+ok: [web4]
+ok: [web5]
+ok: [web6]
+
+TASK [deploy website content] ***************************************************************************************************************************************************************
+ok: [web1]
+ok: [web2]
+ok: [web3]
+ok: [web4]
+ok: [web5]
+ok: [web6]
+
+PLAY [lb] ***********************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] **********************************************************************************************************************************************************************
+ok: [balancer]
+
+TASK [update /etc/hosts file for name resolution of self] ***********************************************************************************************************************************
+ok: [balancer] => (item=balancer)
+
+TASK [update /etc/hosts file for name resolution] *******************************************************************************************************************************************
+ok: [balancer] => (item=web1)
+ok: [balancer] => (item=web2)
+ok: [balancer] => (item=web3)
+ok: [balancer] => (item=web4)
+ok: [balancer] => (item=web5)
+ok: [balancer] => (item=web6)
+
+TASK [install haproxy and socat] ************************************************************************************************************************************************************
+ok: [balancer]
+
+TASK [enable haproxy] ***********************************************************************************************************************************************************************
+ok: [balancer]
+
+TASK [deploy haproxy config] ****************************************************************************************************************************************************************
+ok: [balancer]
+
+TASK [Ensure HAProxy is started and enabled on boot.] ***************************************************************************************************************************************
+ok: [balancer]
+
+PLAY RECAP **********************************************************************************************************************************************************************************
+balancer                   : ok=9    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web1                       : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web2                       : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web3                       : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web4                       : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web5                       : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web6                       : ok=7    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+Here all tasks return ok. Since ansible tasks are idempotent, they will not execute if the desired state is already met (as is the case, has the playbook was just ran).
